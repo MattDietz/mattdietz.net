@@ -1,0 +1,8 @@
+.. link: 
+.. description: 
+.. tags: 
+.. date: 2013/08/12 20:11:39
+.. title: Dummy Post
+.. slug: dummy-post
+
+Write your post here.
