@@ -55,6 +55,8 @@ TRANSLATIONS = {
 # You should provide a key-value pair for each used language.
 SIDEBAR_LINKS = {
     DEFAULT_LANG: (
+        ('https://twitter.com/cerberus98', 'Twitter'),
+        ('https://github.com/cerberus98', 'Github'),
         ('/archive.html', 'Archives'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
@@ -233,7 +235,7 @@ ONE_FILE_POSTS = True
 # INDEXES_PAGES = ""  # If this is empty, the default is 'old posts page %d' translated
 
 # Name of the theme to use.
-THEME = 'site_slate'
+THEME = 'default_spruce'
 
 # Color scheme to be used for code blocks. If your theme provide "assets/css/code.css" this
 # is ignored.
