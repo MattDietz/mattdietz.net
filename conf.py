@@ -90,6 +90,7 @@ SIDEBAR_LINKS = {
 
 post_pages = (
     ("posts/*.txt", "posts", "post.tmpl", True),
+    ("posts/*.md", "posts", "post.tmpl", True),
     ("stories/*.txt", "stories", "story.tmpl", False),
 )
 
