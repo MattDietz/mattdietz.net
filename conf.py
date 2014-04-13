@@ -10,7 +10,7 @@ import time
 
 # Data about this site
 BLOG_AUTHOR = "Matt Dietz"
-BLOG_TITLE = "Software"
+BLOG_TITLE = "mattdietz.net"
 # This is the main URL for your site. It will be used
 # in a prominent link
 SITE_URL = "http://mattdietz.net"
@@ -18,7 +18,7 @@ SITE_URL = "http://mattdietz.net"
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://nikola.ralsina.com.ar"
 BLOG_EMAIL = "matthew.dietz AT gmail.com"
-BLOG_DESCRIPTION = "Clouds, Gamedev, Openstack: How do they work?"
+BLOG_DESCRIPTION = "Aspiring Jazz Programmer"
 
 # Nikola is multilingual!
 #
@@ -57,6 +57,7 @@ SIDEBAR_LINKS = {
     DEFAULT_LANG: (
         ('https://twitter.com/cerberus98', 'Twitter'),
         ('https://github.com/cerberus98', 'Github'),
+        ('https://www.linkedin.com/pub/matt-dietz/3/742/48a', 'LinkedIn'),
         ('/archive.html', 'Archives'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
