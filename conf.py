@@ -53,22 +53,51 @@ TRANSLATIONS = {
 
 # Links for the sidebar / navigation bar.
 # You should provide a key-value pair for each used language.
-SIDEBAR_LINKS = {
+# (the same way you would do with a (translatable) setting.)
+NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ('https://twitter.com/cerberus98', 'Twitter'),
-        ('https://github.com/cerberus98', 'Github'),
-        ('https://www.linkedin.com/pub/matt-dietz/3/742/48a', 'LinkedIn'),
-        ('/archive.html', 'Archives'),
-        ('/categories/index.html', 'Tags'),
-        ('/rss.xml', 'RSS'),
+        ("https://twitter.com/cerberus98", "Twitter"),
+        ("https://github.com/cerberus98", "Github"),
+        ("https://www.linkedin.com/pub/matt-dietz/3/742/48a", "LinkedIn"),
+        ("/archive.html", "Archives"),
+        ("/categories/index.html", "Tags"),
+        ("/rss.xml", "RSS feed"),
     ),
 }
 
+THEME = 'default_spruce'
 
 ##############################################
 # Below this point, everything is optional
 ##############################################
+# Post's dates are considered in UTC by default, if you want to use
+# another time zone, please set TIMEZONE to match. Check the available
+# list from Wikipedia:
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+# (eg. 'Europe/Zurich')
+# Also, if you want to use a different time zone in some of your posts,
+# you can use the ISO 8601/RFC 3339 format (ex. 2012-03-30T23:00:00+02:00)
+TIMEZONE = "UTC"
 
+# If you want to use ISO 8601 (also valid RFC 3339) throughout Nikola
+# (especially in new_post), set this to True.
+# Note that this does not affect DATE_FORMAT.
+# FORCE_ISO8601 = False
+
+# Date format used to display post dates.
+# (str used by datetime.datetime.strftime)
+# DATE_FORMAT = '%Y-%m-%d %H:%M'
+
+# While nikola can select a sensible locale for each language,
+# sometimes explicit control can come handy.
+# In this file we express locales in the string form that
+# python's locales will accept in your OS, by example
+# "en_US.utf8" in unix-like OS, "English_United States" in Windows.
+# LOCALES = dict mapping language --> explicit locale for the languages
+# in TRANSLATIONS. You can ommit one or more keys.
+# LOCALE_FALLBACK = locale to use when an explicit locale is unavailable
+# LOCALE_DEFAULT = locale to use for languages not mentioned in LOCALES; if
+# not set the default Nikola mapping is used.
 
 # post_pages contains (wildcard, destination, template, use_in_feed) tuples.
 #
@@ -96,6 +125,10 @@ POSTS = (
     ("posts/*.md", "posts", "post.tmpl"),
     ("stories/*.txt", "stories", "story.tmpl"),
 )
+PAGES = (
+    ("stories/*.rst", "stories", "story.tmpl"),
+    ("stories/*.txt", "stories", "story.tmpl"),
+)
 
 # One or more folders containing files to be copied as-is into the output.
 # The format is a dictionary of "source" "relative destination".
@@ -111,14 +144,14 @@ POSTS = (
 # 'markdown' is MarkDown
 # 'html' assumes the file is html and just copies it
 COMPILERS = {
-    "rest": ('.txt', '.rst'),
+    "rest": ('.rst', '.txt'),
     "markdown": ('.md', '.mdown', '.markdown'),
     "textile": ('.textile',),
     "txt2tags": ('.t2t',),
     "bbcode": ('.bb',),
     "wiki": ('.wiki',),
     "ipynb": ('.ipynb',),
-    "html": ('.html', '.htm')
+    "html": ('.html', '.htm'),
 }
 
 # Create by default posts in one file format?
@@ -171,7 +204,7 @@ ONE_FILE_POSTS = True
 # relative URL.
 #
 # If you don't need any of these, just set to []
-# REDIRECTIONS = []
+REDIRECTIONS = []
 
 # Commands to execute to deploy. Can be anything, for example,
 # you may use rsync:
@@ -236,7 +269,6 @@ ONE_FILE_POSTS = True
 # INDEXES_PAGES = ""  # If this is empty, the default is 'old posts page %d' translated
 
 # Name of the theme to use.
-THEME = 'default_spruce'
 
 # Color scheme to be used for code blocks. If your theme provide "assets/css/code.css" this
 # is ignored.
@@ -265,6 +297,26 @@ THEME = 'default_spruce'
 # Show only teasers in the index pages? Defaults to False.
 # INDEX_TEASERS = False
 
+# HTML fragments with the Read more... links.
+# The following tags exist and are replaced for you:
+# {link}                        A link to the full post page.
+# {read_more}                   The string “Read more” in the current language.
+# {reading_time}                An estimate of how long it will take to read the post.
+# {remaining_reading_time}      An estimate of how long it will take to read the post, sans the teaser.
+# {min_remaining_read}          The string “{remaining_reading_time} min remaining to read” in the current language.
+# {paragraph_count}             The amount of paragraphs in the post.
+# {remaining_paragraph_count}   The amount of paragraphs in the post, sans the teaser.
+# {{                            A literal { (U+007B LEFT CURLY BRACKET)
+# }}                            A literal } (U+007D RIGHT CURLY BRACKET)
+
+# 'Read more...' for the index page, if INDEX_TEASERS is True (translatable)
+INDEX_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
+# 'Read more...' for the RSS_FEED, if RSS_TEASERS is True (translatable)
+RSS_READ_MORE_LINK = '<p><a href="{link}">{read_more}…</a> ({min_remaining_read})</p>'
+
+# A HTML fragment describing the license, for the sidebar.
+# (translatable)
+LICENSE = ""
 # A HTML fragment describing the license, for the sidebar. Default is "".
 # I recommend using the Creative Commons' wizard:
 # http://creativecommons.org/choose/
@@ -286,6 +338,35 @@ CONTENT_FOOTER = CONTENT_FOOTER.format(email=BLOG_EMAIL,
 # If you want to disable comments, set it to False.
 # Default is "nikolademo", used by the demo sites
 # DISQUS_FORUM = "nikolademo"
+
+CONTENT_FOOTER_FORMATS = {
+    DEFAULT_LANG: (
+        (),
+        {
+            "email": BLOG_EMAIL,
+            "author": BLOG_AUTHOR,
+            "date": time.gmtime().tm_year,
+            "license": LICENSE
+        }
+    )
+}
+# To use comments, you can choose between different third party comment
+# systems.  The following comment systems are supported by Nikola:
+#   disqus, facebook, googleplus, intensedebate, isso, livefyre, muut
+# You can leave this option blank to disable comments.
+COMMENT_SYSTEM = "disqus"
+# And you also need to add your COMMENT_SYSTEM_ID which
+# depends on what comment system you use. The default is
+# "nikolademo" which is a test account for Disqus. More information
+# is in the manual.
+COMMENT_SYSTEM_ID = "nikolademo"
+
+# Enable annotations using annotateit.org?
+# If set to False, you can still enable them for individual posts and pages
+# setting the "annotations" metadata.
+# If set to True, you can disable them for individual posts and pages using
+# the "noannotations" metadata.
+# ANNOTATIONS = False
 
 # Create index.html for story folders?
 # STORY_INDEX = False
@@ -428,6 +509,36 @@ CONTENT_FOOTER = CONTENT_FOOTER.format(email=BLOG_EMAIL,
 #     'localsearch',
 #     'mustache',
 # ]
+# If set to True, enable optional hyphenation in your posts (requires pyphen)
+# HYPHENATE = False
+
+# The <hN> tags in HTML generated by certain compilers (reST/Markdown)
+# will be demoted by that much (1 → h1 will become h2 and so on)
+# This was a hidden feature of the Markdown and reST compilers in the
+# past.  Useful especially if your post titles are in <h1> tags too, for
+# example.
+# (defaults to 1.)
+# DEMOTE_HEADERS = 1
+
+# You can configure the logging handlers installed as plugins or change the
+# log level of the default stderr handler.
+# WARNING: The stderr handler allows only the loglevels of 'INFO' and 'DEBUG'.
+#          This is done for safety reasons, as blocking out anything other
+#          than 'DEBUG' may hide important information and break the user
+#          experience!
+
+LOGGING_HANDLERS = {
+    'stderr': {'loglevel': 'INFO', 'bubble': True},
+    # 'smtp': {
+    #     'from_addr': 'test-errors@example.com',
+    #     'recipients': ('test@example.com'),
+    #     'credentials':('testusername', 'password'),
+    #     'server_addr': ('127.0.0.1', 25),
+    #     'secure': (),
+    #     'level': 'DEBUG',
+    #     'bubble': True
+    # }
+}
 
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
