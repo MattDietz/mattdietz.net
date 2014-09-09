@@ -13,7 +13,7 @@ BLOG_AUTHOR = "Matt Dietz"
 BLOG_TITLE = "mattdietz.net"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://mattdietz.net"
+SITE_URL = "http://mattdietz.net/"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://nikola.ralsina.com.ar"
@@ -91,10 +91,10 @@ SIDEBAR_LINKS = {
 # rss feeds.
 #
 
-post_pages = (
-    ("posts/*.txt", "posts", "post.tmpl", True),
-    ("posts/*.md", "posts", "post.tmpl", True),
-    ("stories/*.txt", "stories", "story.tmpl", False),
+POSTS = (
+    ("posts/*.txt", "posts", "post.tmpl"),
+    ("posts/*.md", "posts", "post.tmpl"),
+    ("stories/*.txt", "stories", "story.tmpl"),
 )
 
 # One or more folders containing files to be copied as-is into the output.
@@ -110,7 +110,7 @@ post_pages = (
 # 'rest' is reStructuredText
 # 'markdown' is MarkDown
 # 'html' assumes the file is html and just copies it
-post_compilers = {
+COMPILERS = {
     "rest": ('.txt', '.rst'),
     "markdown": ('.md', '.mdown', '.markdown'),
     "textile": ('.textile',),
