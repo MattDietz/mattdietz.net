@@ -13,6 +13,8 @@ So, I set out to figure out how to package up SFML with my binary and ship it. A
 
 Enter XCode.
 
+<!-- TEASER_END -->
+
 Getting my project set up was relatively easy, especially using the SFML templates that the SFML installer created for me. However, the first headache came when I tried to build the project against the default settings. After some Googling, I finally stumbled across a [SFML Tutorial](http://www.sfml-dev.org/tutorials/2.0/start-osx.php) about setting up a "Hello World" style Xcode project using SFML. I proceeded to import all the files I'd been working on into XCode, triggered a build and... linker errors. I tried going back to installing the packaged SFML, to no avail. Switched back to compiling frameworks, but had issues with them (though I now realize why that route failed, more below.) and finally went back to where I started, building dylibs from source.
 
 After digging for a bit, I realized the errors I was getting were a lot better than I'd originally given them credit for. Namely, my issue is the default cmake settings for SFML only produce bleeding edge, current OS/X settings, and only for the active architecture. At this point, I should have realized toggling the architecture setting in XCode would have solved my framework issue, but I digress.

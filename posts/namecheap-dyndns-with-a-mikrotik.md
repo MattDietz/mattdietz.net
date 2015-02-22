@@ -12,6 +12,8 @@ I've been wanting to use my Mikrotik to update DynDNS for some time. After diggi
 
 You're going to want to go to Namecheap and enable DynDNS for the domain you'd like to use. Checkout [How do I setup a Host for Dynamic DNS?](https://www.namecheap.com/support/knowledgebase/article.aspx/43/11/how-do-i-setup-a-host-for-dynamic-dns) and [How do I enable Dynamic DNS for a domain?](https://www.namecheap.com/support/knowledgebase/article.aspx/595/11/how-do-i-enable-dynamic-dns-for-a-domain) for more information on getting that setup. After you've done so, Namecheap will show you a password; be sure to copy that.
 
+<!-- TEASER_END -->
+
 Next, log into your router. I find that the Winbox interface is by far the easiest for this task. WINE does a pretty good approximation of Winbox if you don't have a windows box lying somewhere around. Meanwhile, I know there's an OSX client, but the download is suspiciously 151MB, whereas the Windows binary is in the neighborhood of 11MB.
 
 After you've logged in, click on "System," then navigate down to "Scripts." Click on "Add New" and enter a name like "dyndns." Finally, paste the following in the "source" field:
